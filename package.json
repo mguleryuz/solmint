@@ -1,0 +1,21 @@
+{
+  "name": "solmint",
+  "type": "module",
+  "scripts": {
+    "metadata": "bun run scripts/metadata.ts",
+    "deploy": "bun run scripts/deploy.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.1",
+    "@solana/spl-token-metadata": "^0.1.2",
+    "@solana/web3.js": "^1.91.0",
+    "arweave": "^1.14.4",
+    "bip39": "^3.1.0"
+  }
+}
