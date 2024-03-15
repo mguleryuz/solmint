@@ -2,8 +2,8 @@
   "name": "solmint",
   "type": "module",
   "scripts": {
-    "constructMetadata": "bun run scripts/metadata.ts",
-    "mint:interface": "bun run scripts/mintE22.ts",
+    "construct:etadata": "bun run scripts/constructMetadata.ts",
+    "mint:e22": "bun run scripts/mintE22.ts",
     "mint:metaplex": "bun run scripts/mintMetaplex.ts"
   },
   "devDependencies": {

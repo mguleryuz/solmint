@@ -1,6 +1,6 @@
-import type { Cluster } from "@solana/web3.js";
 import readline from "readline";
 import mintWithMetaplex from "../utils/mintWithMetaplex";
+import { isCluster } from "../utils/checkers";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -26,9 +26,3 @@ rl.question("Choose a cluster devnet | testnet | mainnet-beta: ", (cluster) => {
     });
   }
 });
-
-const isCluster = (cluster: string): cluster is Cluster => {
-  if (!["devnet", "testnet", "mainnet-beta"].includes(cluster))
-    throw new Error("Invalid cluster");
-  return true;
-};

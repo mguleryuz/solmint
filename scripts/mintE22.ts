@@ -1,6 +1,6 @@
-import type { Cluster } from "@solana/web3.js";
 import readline from "readline";
 import withMetadataInterface from "../utils/mintWithE22";
+import { isCluster } from "../utils/checkers";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,33 +10,16 @@ const rl = readline.createInterface({
 rl.question("Choose a cluster devnet | testnet | mainnet-beta: ", (cluster) => {
   if (isCluster(cluster)) {
     rl.question("Enter decimals: ", (decimals) => {
-      rl.question("Enter name: ", (name) => {
-        rl.question("Enter description: ", (description) => {
-          rl.question("Enter Metada URI: ", (uri) => {
-            rl.question("Enter symbol: ", async (symbol) => {
-              // =========BEGIN==========
-
-              await withMetadataInterface({
-                cluster,
-                decimals: Number(decimals),
-                name,
-                symbol,
-                description,
-                uri,
-              });
-
-              // =========END============
-              rl.close();
-            });
-          });
+      rl.question("Enter Metada URI: ", async (uri) => {
+        // =========BEGIN==========
+        await withMetadataInterface({
+          cluster,
+          decimals: Number(decimals),
+          uri,
         });
+        // =========END============
+        rl.close();
       });
     });
   }
 });
-
-const isCluster = (cluster: string): cluster is Cluster => {
-  if (!["devnet", "testnet", "mainnet-beta"].includes(cluster))
-    throw new Error("Invalid cluster");
-  return true;
-};

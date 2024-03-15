@@ -23,20 +23,15 @@ import {
   type TokenMetadata,
 } from "@solana/spl-token-metadata";
 import generateKeypairFromSeedPhrase from "./getKeypair";
+import type { OffChainMetadata } from "../types/base";
 
 export default async function ({
   cluster,
   decimals,
-  name,
-  symbol,
-  description,
   uri,
 }: {
   cluster: Cluster;
   decimals: number;
-  name: string;
-  symbol: string;
-  description: string;
   uri: string;
 }) {
   // Playground wallet
@@ -44,6 +39,15 @@ export default async function ({
     publicKey = keypair.publicKey,
     // Connection to testnet cluster
     connection = new Connection(clusterApiUrl(cluster), "confirmed");
+
+  const { name, symbol, description } = <OffChainMetadata>await (
+    await fetch(uri, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  ).json();
 
   // ============MINT_SETUP================
 

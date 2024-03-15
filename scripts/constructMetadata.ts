@@ -1,4 +1,5 @@
 import readline from "readline";
+import writeLog from "../utils/writeLog";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -8,7 +9,7 @@ const rl = readline.createInterface({
 rl.question("Enter name: ", (name) => {
   rl.question("Enter description: ", (description) => {
     rl.question("Enter Image URI: ", (uri) => {
-      rl.question("Enter symbol: ", async (symbol) => {
+      rl.question("Enter symbol: ", (symbol) => {
         // =========BEGIN==========
         const metadata = {
           name,
@@ -17,7 +18,12 @@ rl.question("Enter name: ", (name) => {
           description,
         };
 
-        console.log(metadata);
+        writeLog(metadata, "metadata");
+
+        console.log(
+          "\nMetadata written to file: logs/metadata-<timestamp>.log.json",
+          metadata
+        );
         // =========END============
         rl.close();
       });
