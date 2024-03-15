@@ -1,6 +1,6 @@
 import type { Cluster } from "@solana/web3.js";
 import readline from "readline";
-import withMetadataInterface from "../utils/withMetadataInterface";
+import withMetadataInterface from "../utils/mintWithE22";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -15,25 +15,16 @@ rl.question("Choose a cluster devnet | testnet | mainnet-beta: ", (cluster) => {
           rl.question("Enter Metada URI: ", (uri) => {
             rl.question("Enter symbol: ", async (symbol) => {
               // =========BEGIN==========
-              const { tokenPublickey, transactionSignature } =
-                await withMetadataInterface({
-                  cluster,
-                  decimals: Number(decimals),
-                  name,
-                  symbol,
-                  description,
-                  uri,
-                });
 
-              const fmURL = `https://solana.fm/address/${tokenPublickey}?cluster=${cluster}-solana`;
-              const txURL = `https://solana.fm/tx/${transactionSignature}?cluster=${cluster}-solana`;
+              await withMetadataInterface({
+                cluster,
+                decimals: Number(decimals),
+                name,
+                symbol,
+                description,
+                uri,
+              });
 
-              console.log(
-                "\nCreate Mint Account:",
-                fmURL,
-                "\nTransaction:",
-                txURL
-              );
               // =========END============
               rl.close();
             });

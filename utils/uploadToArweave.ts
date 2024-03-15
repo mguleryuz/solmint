@@ -1,16 +1,7 @@
+import type { UploadToArweaveProps } from "../types/base";
 import getArweaveConfig from "./getArweaveConfig";
 
-type Props =
-  | {
-      type: "png" | "jpeg";
-      data: string;
-    }
-  | {
-      type: "json";
-      data: object | unknown[];
-    };
-
-export default async function ({ type, data }: Props) {
+export default async function ({ type, data }: UploadToArweaveProps) {
   const { keyfile, arweave } = await getArweaveConfig();
 
   const dataType = (() => {

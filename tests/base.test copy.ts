@@ -1,5 +1,5 @@
 import { expect, describe, it } from "bun:test";
-import upload from "../utils/upload";
+import upload from "../utils/uploadToArweave";
 
 describe("test", () => {
   it("blah", async () => {

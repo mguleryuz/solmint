@@ -2,8 +2,9 @@
   "name": "solmint",
   "type": "module",
   "scripts": {
-    "metadata": "bun run scripts/metadata.ts",
-    "deploy": "bun run scripts/deploy.ts"
+    "constructMetadata": "bun run scripts/metadata.ts",
+    "mint:interface": "bun run scripts/mintE22.ts",
+    "mint:metaplex": "bun run scripts/mintMetaplex.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -12,10 +13,15 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@metaplex-foundation/mpl-candy-machine": "^6.0.1",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi": "^0.9.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
     "@solana/spl-token": "^0.4.1",
     "@solana/spl-token-metadata": "^0.1.2",
-    "@solana/web3.js": "^1.91.0",
+    "@solana/web3.js": "^1.91.1",
     "arweave": "^1.14.4",
-    "bip39": "^3.1.0"
+    "bip39": "^3.1.0",
+    "ed25519-hd-key": "^1.3.0"
   }
 }

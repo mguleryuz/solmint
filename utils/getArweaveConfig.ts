@@ -1,10 +1,8 @@
 import Arweave from "arweave";
 import type { JWKInterface } from "arweave/node/lib/wallet";
 
-export default async () => {
-  const keyfile: JWKInterface = await JSON.parse(
-    process.env.ARWEAVE_KEY_FILE ?? ""
-  );
+export default async function () {
+  const keyfile: JWKInterface = JSON.parse(process.env.ARWEAVE_KEY_FILE ?? "");
 
   if (typeof keyfile !== "object") throw new Error("Invalid arweave_keyfile");
 
@@ -24,4 +22,4 @@ export default async () => {
   );
 
   return { keyfile, arweave, getWalletBalance, walletAddress };
-};
+}

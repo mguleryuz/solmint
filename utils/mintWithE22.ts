@@ -22,9 +22,9 @@ import {
   pack,
   type TokenMetadata,
 } from "@solana/spl-token-metadata";
-import generateKeypairFromSeedPhrase from "./solKeypairFromSeedphrase";
+import generateKeypairFromSeedPhrase from "./getKeypair";
 
-export default async function main({
+export default async function ({
   cluster,
   decimals,
   name,
@@ -139,8 +139,14 @@ export default async function main({
       [keypair, mintKeypair] // Signers
     );
 
+  const tokenPublickey = mint.toString(),
+    fmURL = `https://solana.fm/address/${tokenPublickey}?cluster=${cluster}-solana`,
+    txURL = `https://solana.fm/tx/${transactionSignature}?cluster=${cluster}-solana`;
+
+  console.log("\nCreate Mint Account:", fmURL, "\nTransaction:", txURL);
+
   return {
-    tokenPublickey: mint.toString(),
+    tokenPublickey,
     transactionSignature,
   };
 }
